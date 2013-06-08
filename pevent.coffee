@@ -31,6 +31,11 @@ class pevent
       @events[eventName]['sortCache'] = Object.keys(@events[eventName]['callbacks']).sort()
     @eventsPrepared = true;
 
+  off: (key) ->
+    if typeof cb == "undefined"
+      delete @events[key]
+      return @
+
   emit: (key) ->
     @_prepareEvents() if !@eventsPrepared
     return if typeof @events[key] == "undefined"
