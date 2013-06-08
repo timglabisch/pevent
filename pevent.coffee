@@ -10,7 +10,6 @@ class pevent
 
   _onKeyIsScalar:(key, callback, priority = 0) ->
     @_getEventNode(key, priority).push {name: key, priority: priority, callback: callback}
-    @eventsPrepared = false
 
   _onKeyisObject: (obj) ->
     obj.priority = 0 if !obj.hasOwnProperty('priority')
@@ -19,6 +18,8 @@ class pevent
     @_getEventNode(obj.name, obj.priority).push obj
 
   on: ->
+    @eventsPrepared = false
+
     if typeof arguments[0] != "object"
       @_onKeyIsScalar arguments[0], arguments[1], arguments[2]
     else

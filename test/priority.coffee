@@ -8,6 +8,7 @@ describe 'Priority', ->
       ((x) ->
         foo.on
           name: 'bar',
+          priority: x * 1
           callback: ->
             out += x
 
@@ -23,6 +24,7 @@ describe 'Priority', ->
       ((x) ->
         foo.on
           name: 'bar',
+          priority: x * 1
           callback: ->
             out += x
 
