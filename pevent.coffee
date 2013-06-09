@@ -1,8 +1,9 @@
 class pevent
 
-  events: {}
-  eventsPrepared: true
-  eventCallFunction: null
+  constructor: ->
+    @events = {}
+    @eventsPrepared = true
+    @eventCallFunction = null
 
   on: ->
     @eventsPrepared = false
@@ -36,11 +37,13 @@ class pevent
         when 4 then event['callback'].call @, arguments[1], arguments[2], arguments[3], arguments[4]
         else
           event['callback'].apply @, @_argumentsToArraySliceFirst arguments
+    @
 
-  emitFirst: ->
+  emitFirst: (key) ->
     for event in @getListener key
       returnValue = event['callback'].apply @, @_argumentsToArraySliceFirst arguments
       return returnValue if returnValue
+    false
 
   _argumentsToArraySliceFirst: (_arguments)->
     l = _arguments.length

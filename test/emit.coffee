@@ -1,4 +1,4 @@
-describe 'Basic', ->
+describe 'emit', ->
 
   it 'register and emit', ->
     i = 0;
