@@ -1,9 +1,18 @@
+# @license    New BSD License, feel free to minify this
+# @copyright  Copyright (c) 2013 tim glabisch
+
 class pevent
 
   constructor: ->
     @events = {}
     @eventsPrepared = true
     @eventCallFunction = null
+
+  @addPeventMixinTo: (klass) ->
+    self = new @
+    for prop of self
+      klass[prop] = self[prop]
+    klass
 
   on: ->
     @eventsPrepared = false
@@ -17,7 +26,7 @@ class pevent
   off: (key) ->
     if typeof cb == "undefined"
       delete @events[key]
-      return @
+    return @
 
   getListener: (key) ->
     listener = new Array;
@@ -72,7 +81,3 @@ class pevent
     for eventName of @events
       @events[eventName]['sortCache'] = Object.keys(@events[eventName]['callbacks']).sort()
     @eventsPrepared = true;
-
-
-
-
